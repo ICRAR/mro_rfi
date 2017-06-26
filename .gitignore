@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+/mro_rfi.iml
+/.idea/
+/roy_hill_trains/src/mro_rfi.settings
