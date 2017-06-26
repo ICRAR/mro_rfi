@@ -80,7 +80,7 @@ def load_data(**keywords):
         with open(full_filename, "r") as input_file:
             count = 0
             for row in input_file:
-                elements = row.split('|')
+                elements = row.strip().split('|')
                 connection.execute(
                     insert.values(
                         date=elements[0],
