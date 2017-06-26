@@ -69,13 +69,16 @@ def load_data(**keywords):
     )
     engine = create_engine(database_login)
     METADATA.create_all(engine)
+    connection = engine.connect()
 
     insert = RAW_TRAIN_DATA.insert()
     for file in listdir(keywords['data_directory']):
-        connection = engine.connect()
         transaction = connection.begin()
 
-        with open(join(keywords['data_directory'], file), "r") as input_file:
+        full_filename = join(keywords['data_directory'], file)
+        LOG.info('Opening {0}'.format(full_filename))
+        with open(full_filename, "r") as input_file:
+            count = 0
             for row in input_file:
                 elements = row.split('|')
                 connection.execute(
@@ -86,6 +89,10 @@ def load_data(**keywords):
                         longitude=elements[3],
                     )
                 )
+
+                count += 1
+                if (count % 200) == 0:
+                    LOG.info('Adding row {0}'.format(count))
 
         transaction.commit()
 
