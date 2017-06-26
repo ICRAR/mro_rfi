@@ -31,7 +31,7 @@ from os.path import abspath, exists, join, split
 from configobj import ConfigObj
 from sqlalchemy import create_engine
 
-from .tables import METADATA, RAW_TRAIN_DATA
+from tables import METADATA, RAW_TRAIN_DATA
 
 LOG = logging.getLogger(__name__)
 
