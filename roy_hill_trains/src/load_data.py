@@ -75,7 +75,7 @@ def load_data(**keywords):
         connection = engine.connect()
         transaction = connection.begin()
 
-        with open(file, "r") as input_file:
+        with open(join(keywords['data_directory'], file), "r") as input_file:
             for row in input_file:
                 elements = row.split('|')
                 connection.execute(
