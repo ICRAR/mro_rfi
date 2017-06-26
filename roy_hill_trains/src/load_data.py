@@ -106,6 +106,6 @@ if __name__ == "__main__":
         LOG.info('PYTHONPATH = {0}'.format(sys.path))
 
     keyword_dictionary = vars(args)
-    keyword_dictionary.update(ConfigObj(args.settings_file_name))
+    keyword_dictionary.update(ConfigObj(args.settings_file))
 
     load_data(**keyword_dictionary)
