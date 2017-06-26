@@ -44,7 +44,7 @@ def parser_arguments():
     parser.add_argument('--display_python_path', action='store_true', help='Show the Python path', default=True)
     parser.add_argument('-v', '--verbose', action='count', help='The verbosity level', default=1)
     parser.add_argument('--settings_file', help='The settings file', default=config_file_name)
-    parser.add_argument('data_directory', help='The settings file', default=config_file_name)
+    parser.add_argument('data_directory', help='The settings file')
 
     if len(sys.argv[1:]) == 0:
         return parser.parse_args(['-h'])
@@ -94,9 +94,7 @@ if __name__ == "__main__":
     args = parser_arguments()
 
     # Check the settings file exists
-    if exists(args.settings_file):
-        args.settings_file = ConfigObj(args.settings_file)
-    else:
+    if not exists(args.settings_file):
         raise RuntimeError('No configuration file {0}'.format(args.settings_file))
 
     # Configure the logging levels
